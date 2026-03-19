@@ -1,0 +1,56 @@
+11-Qual é o papel dos parâmetros origem, destino e auxiliar no método moverDiscos()?
+
+Pense neles como os papéis que as estacas assumem em cada passo do jogo:
+Origem: De onde o disco sai.
+Destino: Para onde o disco vai.
+Auxiliar: Onde o disco "espera" temporariamente para não bloquear o caminho.
+Na prática, o código troca esses papéis o tempo todo para conseguir mover a torre inteira seguindo as regras.
+
+12- O que acontece se o caso base if (n == 1) for removido do código?
+Se você remover o caso base, o código entrará em uma recursão infinita.
+Em termos simples:
+O método continuará chamando a si mesmo para mover n-1, depois n-2, n-3... e nunca vai parar no 1.
+Ele tentará mover 0 discos, depois -1 discos, -2 discos, e assim por diante.
+O programa vai travar e dar um erro de Stack Overflow (estouro de memória), pois o computador esgota o espaço para guardar tantas chamadas pendentes.
+O if (n == 1) é o "freio" que diz ao algoritmo: "Chegamos ao menor disco possível, agora pode parar de dividir o problema e comece a mover as peças".
+
+13-No trecho abaixo, o que significa a linha moverDiscos(n - 1, origem, auxiliar, destino);?
+
+moverDiscos(n - 1, origem, auxiliar, destino);
+System.out.println("Mover disco " + n + " de " + origem + " para " + destino);
+moverDiscos(n - 1, auxiliar, destino, origem);
+
+Essa linha significa: "Tire a pilha de cima do caminho".
+Para você conseguir mover o disco maior () da origem para o destino, você precisa primeiro mover todos os discos menores () que estão em cima dele para a estaca auxiliar.
+
+14-Por que o algoritmo chama o próprio método dentro dele (recursão)?
+O algoritmo usa a recursão porque o problema da Torre de Hanói é repetitivo por natureza: para mover uma torre de 10 discos, você precisa primeiro saber mover uma de 9; para mover a de 9, precisa saber mover a de 8, e assim por diante.
+
+
+15-O que a função System.out.println() exibe em cada iteração da função recursiva?
+
+A função exibe a instrução de movimento do disco atual.
+Especificamente, ela mostra:
+Qual disco está sendo movido (o número 
+).
+De onde ele está saindo (a estaca origem).
+Para onde ele está indo (a estaca destino).
+Como essa linha só é executada após a primeira chamada recursiva terminar, ela representa o movimento real da peça da base daquela sub-torre específica, documentando o passo a passo da solução no console.
+
+16-Como o número de chamadas recursivas está relacionado ao número de discos (n)?
+O número de chamadas cresce de forma exponencial. A relação é direta: cada disco a mais dobra (aproximadamente) o trabalho do algoritmo.
+
+17-O que aconteceria se os parâmetros destino e auxiliar fossem trocados na primeira chamada recursiva?
+Se você trocasse os parâmetros destino e auxiliar na primeira chamada, o algoritmo passaria a mover os discos para a estaca errada.
+
+18-Qual é o tipo de dado utilizado para representar as hastes (A, B, C) no código?
+Geralmente, utiliza-se o tipo char ou String.
+Ambos servem apenas para dar um rótulo legível que o System.out.println usará para te dizer de onde o disco está saindo e para onde está indo.
+
+19-No programa com contador de movimentos, qual é a finalidade da variável contador?
+A finalidade da variável contador é registrar a quantidade total de passos executados pelo algoritmo para resolver o problema.
+Geralmente, ela é incrementada (contador++) toda vez que a linha System.out.println é executada, já que cada impressão representa um disco mudando de lugar.
+
+20-Se n = 4, quantos movimentos o programa imprimirá no total?
+O programa imprimirá 15 movimentos.
+Isso acontece porque, para mover os 4 discos, o algoritmo precisa mover a "torre de cima" (com 3 discos) duas vezes: uma para liberar o disco da base e outra para cobri-lo no destino final.
